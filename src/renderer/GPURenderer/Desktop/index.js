@@ -10,7 +10,14 @@ let THREE;
 
 /**
  * GPURenderer for devices that support floating point textures.
- *
+ * This renderer takes advantage of GPU acceleration to handle a 
+ * large number of particles more efficiently. Instead of rendering 
+ * each particle individually, it uses a shader and a single draw call
+ * to render all particles simultaneously. This can lead to significant
+ * performance improvements when dealing with a massive number of particles. 
+ * However, this renderer has some limitations in terms of particle
+ * customization and interactivity, as it relies on custom shaders and
+ * may not support all features available in other renderers.
  * @author thrax <manthrax@gmail.com>
  * @author rohan-deshpande <rohan@creativelifeform.com>
  */
