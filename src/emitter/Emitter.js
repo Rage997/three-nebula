@@ -72,6 +72,12 @@ export default class Emitter extends Particle {
     this.currentEmitTime = 0;
 
     /**
+     * @desc The maximum number of particles the emitter can emit.
+     * @type {integer}
+     */
+    this.maxParticles = -1;
+
+    /**
      * @desc The total number of times the emitter should emit particles.
      * @type {integer}
      */
@@ -148,9 +154,19 @@ export default class Emitter extends Particle {
    */
   setRate(rate) {
     this.rate = rate;
-
     return this;
   }
+
+    /**
+   * Sets the emitter maximum number of particles.
+   *
+   * @param {number} maxParticles
+   * @return {Emitter}
+   */
+    setMaxParticles(maxParticles) {
+      this.maxParticles = maxParticles;
+      return this;
+    }
 
   /**
    * Sets the position of the emitter.
