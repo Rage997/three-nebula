@@ -23,10 +23,14 @@ export default class MeshZone extends Zone {
 
     if (bounds.type && bounds.type === 'BufferGeometry') {
       this.geometry = bounds;
-    }
-
-    if (bounds.geometry) {
+    } else if (bounds.geometry) {
       this.geometry = bounds.geometry;
+    } else if (bounds.type && bounds.type === 'Object3D') {
+      bounds.traverse((child) => {
+        if (!this.geometry && child.geometry) {
+          this.geometry = child.geometry;
+        }
+      });
     }
 
     if (!this.geometry) {
