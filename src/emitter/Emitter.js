@@ -146,6 +146,17 @@ export default class Emitter extends Particle {
     this.eventDispatcher.dispatchEvent(event, target);
   }
 
+   /**
+   * Sets the emitter renderer.
+   *
+   * @param {BaseRenderer} renderer - an instance of BaseRenderer
+   * @return {Emitter}
+   */
+    setRenderer(renderer) {
+      this.renderer = renderer;
+      return this;
+    }
+
   /**
    * Sets the emitter rate.
    *
@@ -291,14 +302,16 @@ export default class Emitter extends Particle {
   /**
    * Kills all of the emitter's particles.
    *
-   * @return void
+   * @return {integer} the number of particles removed
    */
   removeAllParticles() {
     let i = this.particles.length;
 
     while (i--) {
-      this.particles[i].dead = true;
+      this.renderer && this.renderer.onParticleDead(this.particles[i]);
+      this.particles[i].destroy();
     }
+    return i;
   }
 
   /**

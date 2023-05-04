@@ -146,6 +146,23 @@ export default class System {
   }
 
   /**
+ * Removes all renderers from the System instance.
+ *
+ * @return {System}
+ */
+  removeAllRenderers() {
+    // Call the remove method for each renderer
+    for (const renderer of this.renderers) {
+      this.removeRenderer(renderer);
+    }
+
+    // Clear the renderers array
+    this.renderers = [];
+
+    return this;
+  }
+
+  /**
    * Adds an emitter to the System instance.
    * Dispatches the EMITTER_ADDED event.
    *
@@ -176,6 +193,11 @@ export default class System {
       return this;
     }
 
+    if (emitter.isEmitting) {
+      emitter.stopEmit();
+      emitter.removeAllParticles();
+    }
+    
     emitter.parent = null;
     emitter.index = undefined;
 
@@ -183,6 +205,23 @@ export default class System {
     this.dispatch(EMITTER_REMOVED, emitter);
 
     return this;
+  }
+    
+  /**
+   * Kills all the particles of the system.
+   * Dispatches the EMITTER_REMOVED event.
+   *
+   * @param {Emitter} emitter - The emitter to remove
+   * @return {integer} the number of particles removed
+   */
+  killAllParticles() {
+    let total = 0;
+
+    for (const emitter of this.emitters) {
+      total += emitter.removeAllParticles();
+    }
+
+    return total;
   }
 
   /**
@@ -305,7 +344,9 @@ export default class System {
     this.canUpdate = false;
 
     for (let e = 0; e < length; e++) {
-      this.emitters[e] && this.emitters[e].destroy();
+      this.emitters[e].stopEmit();
+      this.emitters[e].removeAllParticles();
+      this.emitters[e].destroy();
       delete this.emitters[e];
     }
 
