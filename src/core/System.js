@@ -140,7 +140,7 @@ export default class System {
    */
   removeRenderer(renderer) {
     this.renderers.splice(this.renderers.indexOf(renderer), 1);
-    renderer.remove(this);
+    // renderer.remove(this);
 
     return this;
   }

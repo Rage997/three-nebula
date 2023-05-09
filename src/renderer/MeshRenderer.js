@@ -50,7 +50,7 @@ export default class MeshRenderer extends BaseRenderer {
       particle.target = this._targetPool.get(particle.body);
 
       // Set material
-      if (particle.useAlpha || particle.useColor) {
+      if ( (particle.useAlpha || particle.useColor) && particle.target.material) {
         particle.target.material.__puid = PUID.id(particle.body.material);
         particle.target.material = this._materialPool.get(
           particle.target.material

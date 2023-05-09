@@ -34,7 +34,6 @@ export default class BaseRenderer {
     this.system.eventDispatcher.removeEventListener(PARTICLE_CREATED, this.boundOnParticleCreated);
     this.system.eventDispatcher.removeEventListener(PARTICLE_UPDATE, this.boundOnParticleUpdate);
     this.system.eventDispatcher.removeEventListener(PARTICLE_DEAD, this.boundOnParticleDead);
-
     this.remove();
   }
 
