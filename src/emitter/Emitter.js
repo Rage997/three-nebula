@@ -152,10 +152,10 @@ export default class Emitter extends Particle {
    * @param {BaseRenderer} renderer - an instance of BaseRenderer
    * @return {Emitter}
    */
-    setRenderer(renderer) {
-      this.renderer = renderer;
-      return this;
-    }
+  setRenderer(renderer) {
+    this.renderer = renderer;
+    return this;
+  }
 
   /**
    * Sets the emitter rate.
@@ -726,6 +726,11 @@ export default class Emitter extends Particle {
       this.dispatch(`${this.id}_${EMITTER_DEAD}`);
 
       this.parent && this.parent.removeEmitter(this);
+    }
+
+    if (this.renderer) {
+      this.renderer.destroy();
+      this.renderer = null;
     }
   }
 }
