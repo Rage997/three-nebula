@@ -16,7 +16,6 @@ export default class MeshRenderer extends BaseRenderer {
   constructor(container, THREE) {
     super(type);
 
-    console.log("Particle System MeshRenderer");
     this.container = container;
     this._targetPool = new Pool();
     this._materialPool = new Pool();
