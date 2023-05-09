@@ -59,7 +59,7 @@ export default class ScreenZone extends Zone {
       particle.dead = true;
     }
   }
-
+  
   _bound(particle) {
     var pos = THREEUtil.toScreenPos(
       particle.position,
@@ -67,19 +67,20 @@ export default class ScreenZone extends Zone {
       this.renderer.domElement
     );
     var canvas = this.renderer.domElement;
-
+  
     if (pos.y + particle.radius < -this.dis) {
       particle.velocity.y *= -1;
     } else if (pos.y - particle.radius > canvas.height + this.dis) {
       particle.velocity.y *= -1;
     }
-
+  
     if (pos.x + particle.radius < -this.dis) {
-      particle.velocity.y *= -1;
+      particle.velocity.x *= -1; // Updated from particle.velocity.y
     } else if (pos.x - particle.radius > canvas.width + this.dis) {
-      particle.velocity.y *= -1;
+      particle.velocity.x *= -1; // Updated from particle.velocity.y
     }
   }
+  
 }
 
 ScreenZone.prototype.getPosition = (function() {
