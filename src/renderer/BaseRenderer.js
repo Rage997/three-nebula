@@ -10,43 +10,32 @@ import { __DEV__ } from '../constants';
 
 export default class BaseRenderer {
   constructor(type = RENDERER_TYPE_BASE) {
-    /**
-     * @desc The class type.
-     * @type {string}
-     */
     this.type = type;
+
+    this.boundOnSystemUpdate = this.onSystemUpdate.bind(this);
+    this.boundOnParticleCreated = this.onParticleCreated.bind(this);
+    this.boundOnParticleUpdate = this.onParticleUpdate.bind(this);
+    this.boundOnParticleDead = this.onParticleDead.bind(this);
   }
 
   init(system) {
-    var self = this;
-
     this.system = system;
 
-    this.system.eventDispatcher.addEventListener(SYSTEM_UPDATE, function(
-      system
-    ) {
-      self.onSystemUpdate.call(self, system);
-    });
-
-    this.system.eventDispatcher.addEventListener(PARTICLE_CREATED, function(
-      particle
-    ) {
-      self.onParticleCreated.call(self, particle);
-    });
-
-    this.system.eventDispatcher.addEventListener(PARTICLE_UPDATE, function(
-      particle
-    ) {
-      self.onParticleUpdate.call(self, particle);
-    });
-
-    this.system.eventDispatcher.addEventListener(PARTICLE_DEAD, function(
-      particle
-    ) {
-      self.onParticleDead.call(self, particle);
-    });
+    this.system.eventDispatcher.addEventListener(SYSTEM_UPDATE, this.boundOnSystemUpdate);
+    this.system.eventDispatcher.addEventListener(PARTICLE_CREATED, this.boundOnParticleCreated);
+    this.system.eventDispatcher.addEventListener(PARTICLE_UPDATE, this.boundOnParticleUpdate);
+    this.system.eventDispatcher.addEventListener(PARTICLE_DEAD, this.boundOnParticleDead);
 
     this.logRendererType();
+  }
+
+  destroy() {
+    this.system.eventDispatcher.removeEventListener(SYSTEM_UPDATE, this.boundOnSystemUpdate);
+    this.system.eventDispatcher.removeEventListener(PARTICLE_CREATED, this.boundOnParticleCreated);
+    this.system.eventDispatcher.removeEventListener(PARTICLE_UPDATE, this.boundOnParticleUpdate);
+    this.system.eventDispatcher.removeEventListener(PARTICLE_DEAD, this.boundOnParticleDead);
+
+    this.remove();
   }
 
   remove() {
