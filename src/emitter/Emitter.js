@@ -12,13 +12,23 @@ import EventDispatcher, {
   PARTICLE_UPDATE,
   SYSTEM_UPDATE,
 } from '../events';
-import { INTEGRATION_TYPE_EULER, integrate } from '../math';
-import { Util, uid } from '../utils';
+import {
+  INTEGRATION_TYPE_EULER,
+  integrate
+} from '../math';
+import {
+  Util,
+  uid
+} from '../utils';
 
-import { InitializerUtil } from '../initializer';
+import {
+  InitializerUtil
+} from '../initializer';
 import Particle from '../core/Particle';
 import isNumber from 'lodash/isNumber';
-import { EMITTER_TYPE_EMITTER as type } from './types';
+import {
+  EMITTER_TYPE_EMITTER as type
+} from './types';
 
 /**
  * Emitters are the System engine's particle factories. They cause particles to
@@ -146,7 +156,7 @@ export default class Emitter extends Particle {
     this.eventDispatcher.dispatchEvent(event, target);
   }
 
-   /**
+  /**
    * Sets the emitter renderer.
    *
    * @param {BaseRenderer} renderer - an instance of BaseRenderer
@@ -168,16 +178,16 @@ export default class Emitter extends Particle {
     return this;
   }
 
-    /**
+  /**
    * Sets the emitter maximum number of particles.
    *
    * @param {number} maxParticles
    * @return {Emitter}
    */
-    setMaxParticles(maxParticles) {
-      this.maxParticles = maxParticles;
-      return this;
-    }
+  setMaxParticles(maxParticles) {
+    this.maxParticles = maxParticles;
+    return this;
+  }
 
   /**
    * Sets the position of the emitter.
@@ -597,8 +607,7 @@ export default class Emitter extends Particle {
       this.destroy();
     }
 
-    if (this.isEmitting)
-    {
+    if (this.isEmitting) {
       this.generate(time);
     }
 
@@ -614,8 +623,7 @@ export default class Emitter extends Particle {
         this.bindEmitterEvent && this.dispatch(PARTICLE_DEAD, particle);
         this.parent.pool.expire(particle.reset());
         this.particles.splice(i, 1);
-        if(this.particles.length === 0)
-        {
+        if (this.particles.length === 0) {
           this.parent && this.parent.dispatch(SYSTEM_UPDATE);
         }
       }
@@ -650,9 +658,9 @@ export default class Emitter extends Particle {
    * @return void
    */
   integrate(time) {
-    const integrationType = this.parent
-      ? this.parent.integrationType
-      : INTEGRATION_TYPE_EULER;
+    const integrationType = this.parent ?
+      this.parent.integrationType :
+      INTEGRATION_TYPE_EULER;
     const damping = 1 - this.damping;
 
     integrate(this, time, damping, integrationType);
@@ -684,7 +692,7 @@ export default class Emitter extends Particle {
         this.cID = i;
       }
 
-      while (i--) {
+      while (i-- && (this.particles.length < this.maxParticles)) {
         this.createParticle();
       }
 
@@ -702,7 +710,7 @@ export default class Emitter extends Particle {
         this.cID = i;
       }
 
-      while (i--) {
+      while (i-- && (this.particles.length < this.maxParticles)) {
         this.createParticle();
       }
     }
@@ -726,10 +734,5 @@ export default class Emitter extends Particle {
 
       this.parent && this.parent.removeEmitter(this);
     }
-
-    // if (this.renderer) {
-    //   this.renderer.destroy();
-    //   this.renderer = null;
-    // }
   }
 }
