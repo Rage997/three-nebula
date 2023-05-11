@@ -550,9 +550,8 @@ export default class Emitter extends Particle {
     const index = this.particles.length;
 
     this.setupParticle(particle, index);
-    this.parent && this.parent.dispatch(PARTICLE_CREATED, particle);
+    this.parent && this.parent.dispatch(`${this.id}_${PARTICLE_CREATED}`, particle);
     this.bindEmitterEvent && this.dispatch(PARTICLE_CREATED, particle);
-
     return particle;
   }
 
@@ -611,7 +610,7 @@ export default class Emitter extends Particle {
       const particle = this.particles[i];
 
       if (particle.dead) {
-        this.parent && this.parent.dispatch(PARTICLE_DEAD, particle);
+        this.parent && this.parent.dispatch(`${this.id}_${PARTICLE_DEAD}`, particle);;
         this.bindEmitterEvent && this.dispatch(PARTICLE_DEAD, particle);
         this.parent.pool.expire(particle.reset());
         this.particles.splice(i, 1);
@@ -666,7 +665,7 @@ export default class Emitter extends Particle {
       particle.update(time, index);
       integrate(particle, time, damping, integrationType);
 
-      this.parent && this.parent.dispatch(PARTICLE_UPDATE, particle);
+      this.parent && this.parent.dispatch(`${this.id}_${PARTICLE_UPDATE}`, particle);
       this.bindEmitterEvent && this.dispatch(PARTICLE_UPDATE, particle);
     }
   }
@@ -728,9 +727,9 @@ export default class Emitter extends Particle {
       this.parent && this.parent.removeEmitter(this);
     }
 
-    if (this.renderer) {
-      this.renderer.destroy();
-      this.renderer = null;
-    }
+    // if (this.renderer) {
+    //   this.renderer.destroy();
+    //   this.renderer = null;
+    // }
   }
 }

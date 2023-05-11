@@ -18,22 +18,26 @@ export default class BaseRenderer {
     this.boundOnParticleDead = this.onParticleDead.bind(this);
   }
 
+  setId(id) {
+    this.id = id;
+  }
+
   init(system) {
     this.system = system;
 
     this.system.eventDispatcher.addEventListener(SYSTEM_UPDATE, this.boundOnSystemUpdate);
-    this.system.eventDispatcher.addEventListener(PARTICLE_CREATED, this.boundOnParticleCreated);
-    this.system.eventDispatcher.addEventListener(PARTICLE_UPDATE, this.boundOnParticleUpdate);
-    this.system.eventDispatcher.addEventListener(PARTICLE_DEAD, this.boundOnParticleDead);
+    this.system.eventDispatcher.addEventListener(`${this.id}_${PARTICLE_CREATED}`, this.boundOnParticleCreated);
+    this.system.eventDispatcher.addEventListener(`${this.id}_${PARTICLE_UPDATE}`, this.boundOnParticleUpdate);
+    this.system.eventDispatcher.addEventListener(`${this.id}_${PARTICLE_DEAD}`, this.boundOnParticleDead);
 
     this.logRendererType();
   }
 
   destroy() {
     this.system.eventDispatcher.removeEventListener(SYSTEM_UPDATE, this.boundOnSystemUpdate);
-    this.system.eventDispatcher.removeEventListener(PARTICLE_CREATED, this.boundOnParticleCreated);
-    this.system.eventDispatcher.removeEventListener(PARTICLE_UPDATE, this.boundOnParticleUpdate);
-    this.system.eventDispatcher.removeEventListener(PARTICLE_DEAD, this.boundOnParticleDead);
+    this.system.eventDispatcher.removeEventListener(`${this.id}_${PARTICLE_CREATED}`, this.boundOnParticleCreated);
+    this.system.eventDispatcher.removeEventListener(`${this.id}_${PARTICLE_UPDATE}`, this.boundOnParticleUpdate);
+    this.system.eventDispatcher.removeEventListener(`${this.id}_${PARTICLE_DEAD}`, this.boundOnParticleDead);
     this.remove();
   }
 
