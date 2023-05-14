@@ -1,5 +1,4 @@
 import { PI } from '../constants';
-import Util from '../utils/Util';
 import Vector3D from '../math/Vector3D';
 import Zone from './Zone';
 import { ZONE_TYPE_SPHERE as type } from './types';
@@ -60,8 +59,8 @@ export default class SphereZone extends Zone {
 
   getPosition() {
     const r = Math.random() * this.radius;
-    const tha = Math.PI * Math.random(); //[0-pi]
-    const phi = Math.PI * 2 * Math.random(); //[0-2pi]
+    const tha = PI * Math.random(); //[0-pi]
+    const phi = PI * 2 * Math.random(); //[0-2pi]
   
     this.vector.x = this.x + r * Math.sin(tha) * Math.cos(phi);
     this.vector.y = this.y + r * Math.sin(phi) * Math.sin(tha);

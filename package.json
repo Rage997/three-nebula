@@ -1,6 +1,6 @@
 {
-  "name": "three-nebula",
-  "version": "10.0.3",
+  "name": "@rage997/three-nebula",
+  "version": "10.1.2",
   "description": "WebGL based 3D particle engine",
   "main": "./build/cjs/index.js",
   "module": "./build/esm/index.js",
@@ -45,7 +45,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativelifeform/three-nebula.git"
+    "url": "git+https://github.com/Rage997/three-nebula"
   },
   "keywords": [
     "particle",
@@ -59,9 +59,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/creativelifeform/three-nebula/issues"
+    "url": "https://github.com/Rage997/three-nebula/issues"
   },
-  "homepage": "https://github.com/creativelifeform/three-nebula#readme",
+  "homepage": "https://github.com/Rage997/three-nebula#readme",
   "dependencies": {
     "lodash": "^4.17.21",
     "potpack": "^1.0.1",

@@ -164,6 +164,7 @@ export default class Emitter extends Particle {
    */
   setRenderer(renderer) {
     this.renderer = renderer;
+    
     return this;
   }
 
@@ -175,6 +176,7 @@ export default class Emitter extends Particle {
    */
   setRate(rate) {
     this.rate = rate;
+
     return this;
   }
 
@@ -186,6 +188,7 @@ export default class Emitter extends Particle {
    */
   setMaxParticles(maxParticles) {
     this.maxParticles = maxParticles;
+
     return this;
   }
 
@@ -321,6 +324,7 @@ export default class Emitter extends Particle {
       this.renderer && this.renderer.onParticleDead(this.particles[i]);
       this.particles[i].destroy();
     }
+
     return i;
   }
 
@@ -562,6 +566,7 @@ export default class Emitter extends Particle {
     this.setupParticle(particle, index);
     this.parent && this.parent.dispatch(`${this.id}_${PARTICLE_CREATED}`, particle);
     this.bindEmitterEvent && this.dispatch(PARTICLE_CREATED, particle);
+
     return particle;
   }
 
@@ -619,7 +624,7 @@ export default class Emitter extends Particle {
       const particle = this.particles[i];
 
       if (particle.dead) {
-        this.parent && this.parent.dispatch(`${this.id}_${PARTICLE_DEAD}`, particle);;
+        this.parent && this.parent.dispatch(`${this.id}_${PARTICLE_DEAD}`, particle);
         this.bindEmitterEvent && this.dispatch(PARTICLE_DEAD, particle);
         this.parent.pool.expire(particle.reset());
         this.particles.splice(i, 1);
