@@ -292,6 +292,7 @@ export default class DesktopGPURenderer extends BaseRenderer {
   destroy() {
     super.destroy();
     const { container, points, textureAtlas, uniqueList } = this;
+    
     container.remove(points);
     uniqueList.destroy();
     textureAtlas && textureAtlas.destroy();

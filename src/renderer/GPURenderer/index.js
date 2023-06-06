@@ -24,14 +24,17 @@ export default class GPURenderer extends BaseRenderer {
 
     if (shouldForceDesktopRenderer) {
       return new DesktopGPURenderer(...args);
+
     }
 
     if (shouldForceMobileRenderer) {
       return new MobileGPURenderer(...args);
+
     }
 
     if (!this.isFloatingPointTextureSupported()) {
       return new MobileGPURenderer(...args);
+
     }
 
     return new DesktopGPURenderer(...args);

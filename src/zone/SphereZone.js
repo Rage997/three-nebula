@@ -81,6 +81,7 @@ export default class SphereZone extends Zone {
         .normalize();
       v.copy(particle.velocity);
       const k = 2 * v.dot(normal);
+      
       particle.velocity.sub(normal.scalar(k));
     }
   }
