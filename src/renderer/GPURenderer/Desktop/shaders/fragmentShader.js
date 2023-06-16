@@ -23,7 +23,7 @@ export const fragmentShader = () => {
         
       gl_FragColor = texture2D(uTexture, uv);
       if (useColorMultiplier == 1) {
-        gl_FragColor = vec4(baseColor * targetColor, targetAlpha);
+        gl_FragColor = vec4(baseColor * targetColor, gl_FragColor.a);
       }
     }
 `;
