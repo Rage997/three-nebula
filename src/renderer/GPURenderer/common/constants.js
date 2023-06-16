@@ -3,6 +3,7 @@ import { DEFAULT_MAX_PARTICLES } from './ParticleBuffer/constants';
 export const DEFAULT_RENDERER_OPTIONS = {
   blending: 'AdditiveBlending',
   baseColor: 0xffffff,
+  useColorMultiplier: false,
   depthTest: true,
   depthWrite: false,
   transparent: true,

@@ -3,6 +3,7 @@ export const fragmentShader = () => {
     uniform vec3 baseColor;
     uniform sampler2D uTexture;
     uniform sampler2D atlasIndex;
+    uniform int useColorMultiplier;
 
     varying float vRotation;
     varying vec3 targetColor;
@@ -11,8 +12,6 @@ export const fragmentShader = () => {
     varying float tileID;
 
     void main() {
-      gl_FragColor = vec4(baseColor * targetColor, targetAlpha);
-
       vec2 uv = gl_PointCoord;
       uv = mix(tileRect.xy, tileRect.zw, gl_PointCoord);
 
@@ -21,9 +20,11 @@ export const fragmentShader = () => {
         cos(vRotation) * (uv.x - mid) - sin(vRotation) * (uv.y - mid) + mid,
         cos(vRotation) * (uv.y - mid) + sin(vRotation) * (uv.x - mid) + mid
       );
-
-      gl_FragColor = gl_FragColor * texture2D(uTexture, uv);
-
+        
+      gl_FragColor = texture2D(uTexture, uv);
+      if (useColorMultiplier == 1) {
+        gl_FragColor = vec4(baseColor * targetColor, targetAlpha);
+      }
     }
 `;
 };

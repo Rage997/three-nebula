@@ -31,6 +31,7 @@ export default class DesktopGPURenderer extends BaseRenderer {
       camera,
       maxParticles,
       baseColor,
+      useColorMultiplier,
       blending,
       depthTest,
       depthWrite,
@@ -42,6 +43,7 @@ export default class DesktopGPURenderer extends BaseRenderer {
       uniforms: {
         baseColor: { value: new THREE.Color(baseColor) },
         uTexture: { value: null },
+        useColorMultiplier: { type: 'i', value: +useColorMultiplier },
         atlasIndex: { value: null },
       },
       vertexShader: vertexShader(),
