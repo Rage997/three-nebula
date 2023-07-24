@@ -2,7 +2,7 @@ import { PI } from '../constants';
 
 class MathUtils {
   constructor() {
-    this.setSeed(12345); // Initial seed
+    this.setSeed();
   }
 
   // A pseudo-random number generator with a given seed
