@@ -1,6 +1,7 @@
 import Zone from './Zone';
 import { ZONE_TYPE_MESH as type } from './types';
 import { Vector3 } from 'three';
+import { MathUtils } from '../math';
 
 /**
  * Uses a three THREE.BufferGeometry to determine the zone parameters.
@@ -51,7 +52,7 @@ export default class MeshZone extends Zone {
 
   getPosition() {
     const positionAttribute = this.geometry.getAttribute('position');
-    const randomIndex = (positionAttribute.count * Math.random()) >> 0;
+    const randomIndex = (positionAttribute.count * MathUtils.myRandom()) >> 0;
 
     const x = positionAttribute.getX(randomIndex) * this.scale;
     const y = positionAttribute.getY(randomIndex) * this.scale;

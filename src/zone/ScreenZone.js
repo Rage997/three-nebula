@@ -2,6 +2,7 @@ import THREEUtil from '../utils/THREEUtil';
 import Vector3D from '../math/Vector3D';
 import Zone from './Zone';
 import { ZONE_TYPE_SCREEN as type } from './types';
+import { MathUtils } from '../math';
 
 export default class ScreenZone extends Zone {
   /**
@@ -89,8 +90,8 @@ ScreenZone.prototype.getPosition = (function() {
 
   return function() {
     canvas = this.renderer.domElement;
-    vec2.x = Math.random() * canvas.width;
-    vec2.y = Math.random() * canvas.height;
+    vec2.x = MathUtils.myRandom() * canvas.width;
+    vec2.y = MathUtils.myRandom() * canvas.height;
     this.vector.copy(THREEUtil.toSpacePos(vec2, this.camera, canvas));
 
     return this.vector;

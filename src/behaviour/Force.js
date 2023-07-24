@@ -1,5 +1,5 @@
 import Behaviour from './Behaviour';
-import { Vector3D } from '../math';
+import { Vector3D, MathUtils } from '../math';
 import { getEasingByName } from '../ease';
 import { BEHAVIOUR_TYPE_FORCE as type } from './types';
 /**
@@ -42,7 +42,7 @@ export default class Force extends Behaviour {
      * @desc The id of the force vector
      * @property {number} this.force.id
      */
-    this.force.id = Math.random();
+    this.force.id = MathUtils.myRandom();
   }
 
   /**

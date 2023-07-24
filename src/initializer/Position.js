@@ -3,6 +3,7 @@ import * as Zone from '../zone';
 import Initializer from './Initializer';
 import { SUPPORTED_JSON_ZONE_TYPES } from '../core/constants';
 import { INITIALIZER_TYPE_POSITION as type } from './types';
+import { MathUtils } from '../math';
 
 /**
  * Sets the starting position property for initialized particles.
@@ -83,8 +84,8 @@ Position.prototype.initialize = (function() {
   let zone;
 
   return function(target) {
-    zone = this.zones[(Math.random() * this.zones.length) >> 0];
-
+    zone = this.zones[(MathUtils.myRandom() * this.zones.length) >> 0];
+    
     zone.getPosition();
 
     target.position.x = zone.vector.x;

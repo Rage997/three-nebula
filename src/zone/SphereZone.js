@@ -2,6 +2,7 @@ import { PI } from '../constants';
 import Vector3D from '../math/Vector3D';
 import Zone from './Zone';
 import { ZONE_TYPE_SPHERE as type } from './types';
+import { MathUtils } from '../math';
 
 /**
  * A spherical zone for particles to be emitted within.
@@ -58,9 +59,9 @@ export default class SphereZone extends Zone {
   }
 
   getPosition() {
-    const r = Math.random() * this.radius;
-    const tha = PI * Math.random(); //[0-pi]
-    const phi = PI * 2 * Math.random(); //[0-2pi]
+    const r = MathUtils.myRandom() * this.radius;
+    const tha = PI * MathUtils.myRandom(); //[0-pi]
+    const phi = PI * 2 * MathUtils.myRandom(); //[0-2pi]
   
     this.vector.x = this.x + r * Math.sin(tha) * Math.cos(phi);
     this.vector.y = this.y + r * Math.sin(phi) * Math.sin(tha);
