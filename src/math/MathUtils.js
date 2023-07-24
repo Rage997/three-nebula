@@ -1,28 +1,40 @@
 import { PI } from '../constants';
 
+function SeededRandom(seed) {
+  return function() {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  }
+}
+
+let myRandom = Math.random; // default to Math.random if no seed is specified
+
 export default {
+  setSeed: function(seed) {
+    if (seed === undefined) {
+      myRandom = Math.random;
+    } else {
+      myRandom = SeededRandom(seed);
+    }
+  },
   randomAToB: function(a, b, INT) {
-    if (!INT) return a + Math.random() * (b - a);
-    else return ((Math.random() * (b - a)) >> 0) + a;
+    if (!INT) return a + myRandom() * (b - a);
+    else return ((myRandom() * (b - a)) >> 0) + a;
   },
   randomFloating: function(center, f, INT) {
     return this.randomAToB(center - f, center + f, INT);
   },
-
   randomZone: function(display) {}, //eslint-disable-line
-
   degreeTransform: function(a) {
     return (a * PI) / 180;
   },
-
   toColor16: function getRGB(num) {
     return '#' + num.toString(16);
   },
-
   randomColor: function() {
     return (
       '#' +
-      ('00000' + ((Math.random() * 0x1000000) << 0).toString(16)).slice(-6)
+      ('00000' + ((myRandom() * 0x1000000) << 0).toString(16)).slice(-6)
     );
   },
 
