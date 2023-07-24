@@ -15,12 +15,12 @@ class MathUtils {
 
   // Method to set seed. If no seed is provided, defaults to Math.random
   setSeed(seed) {
-    this.myRandom = seed === undefined ? Math.random : this.SeededRandom(seed);
+    this.randomFunction = seed === undefined ? Math.random : this.SeededRandom(seed);
   }
 
   // Wrapper around the current random function
   myRandom() {
-    return this.myRandom();
+    return this.randomFunction();
   }
 
   // Returns a random number between a and b. If INT is true, the number is integer.
