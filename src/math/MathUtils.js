@@ -4,7 +4,7 @@ function SeededRandom(seed) {
   return function() {
     seed = (seed * 9301 + 49297) % 233280;
     return seed / 233280;
-  }
+  };
 }
 
 let myRandom = Math.random; // default to Math.random if no seed is specified
